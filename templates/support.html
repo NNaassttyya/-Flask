@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityVibe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" width="50" height="50" alt="Логотип">
+            <a href="#" class="navbar-brand">City vibe</a>
+            <div class="navbar-wrap">
+                <ul class="navbar-menu">
+                    <li><a href="{{ url_for('map') }}">Карта</a></li>
+                    <li><a href="{{ url_for('index') }}">Главная</a></li>
+                    <li><a href="#!" class="active">Тех поддержка</a></li>
+                </ul>
+            </div>
+            <a class="entrance" href="#" id="auth-button"
+               onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+            <div class="sign-up" id="sign-up">
+                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
+
+                <form action="#" class="sign-up-content">
+                    <div class="container-sign">
+                        <h2>City Vibe</h2>
+                        <div class="reg">
+                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-vk.svg" alt="VK Logo">
+                                            </span>
+                                <span class="social-text">Вконтакте</span>
+                            </button>
+                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-google.svg" alt="Google Logo">
+                                            </span>
+                                <span class="social-text">Google</span>
+                            </button>
+                        </div>
+                        <h4>Или</h4>
+                        <h4>
+                            <button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться
+                            </button>
+                        </h4>
+                        <label for="name">Логин</label>
+                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                        <label for="email">Почта</label>
+                        <input type="email" id="email" name="email" placeholder="Ваша почта" required
+                               autocomplete="off">
+
+                        <label for="pass">Пароль</label>
+                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                        <div class="buttons">
+                            <button type="button" class="cancelBtn"
+                                    onclick="document.getElementById('sign-up').style.display='none'">Закрыть
+                            </button>
+                            <button type="button" class="signUpBtn">Войти</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="sign-up" id="register-form" style="display: none;">
+                <span class="close" onclick="closeAllModals()">&times;</span>
+                <div class="sign-up-content">
+                    <div class="container-sign">
+                        <h2>City Vibe</h2>
+                        <form class="register-form">
+                            <label for="reg-login">Логин</label>
+                            <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                            <label for="reg-password">Пароль</label>
+                            <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                            <label for="reg-email">Почта</label>
+                            <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                            <div class="buttons">
+                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                <button type="button" id="auth-button1" class="register-btn" onclick="registerUser()">
+                                    Зарегистрироваться
+                                </button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+
+<section class="call-us">
+    <div class="form-container">
+        <h1 class="section-title contacts-title">Связаться с нами</h1>
+        <p class="contact-text">Не стесняйтесь обращаться к нам с вопросами, потенциальными предложениями о
+            сотрудничестве и возникшими проблемами.</p>
+        <form action="#" class="form">
+            <input class="form-input" type="text-name" placeholder="Ваше имя">
+            <input class="form-input" type="e-mail" placeholder="Ваша почта" required>
+            <textarea class="form-textarea" placeholder="Ваш текст" required></textarea>
+            <button class="form-Btn" type="submit">Отправить</button>
+        </form>
+    </div>
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Сообщение успешно отправлено!</h3>
+            <p>Мы ответим вам в ближайшее время.</p>
+            <button class="modal-close" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+</section>
+<footer>
+    <nav class="footer-nav">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="nav-section">
+                    <h2>Навигация</h2>
+                    <ul class="footer-menu">
+                        <li><a href="{{ url_for('index') }}">Главная</a></li>
+                        <li><a href="{{ url_for('map') }}">Карта</a></li>
+                        <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                    </ul>
+                </div>
+
+                <div class="social-section">
+                    <h2>Социальные сети</h2>
+                    <ul class="footer-menu-media">
+                        <li><a href="#"><img src="{{ url_for('static', filename='images/tg.svg') }}"></a></li>
+                        <li><a href="#"><img src="{{ url_for('static', filename='images/tiktok.svg') }}"></a></li>
+                        <li><a href="#"><img
+                                src="{{ url_for('static', filename='images/stash_telegram.svg') }}"></a></li>
+                    </ul>
+                </div>
+
+                <div class="partners-section">
+                    <h2>Партнерам</h2>
+                    <ul class="partners-list">
+                        <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                        <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="contacts-section">
+                    <h2>Контакты</h2>
+                    <ul class="contacts-list">
+                        <li><a href="#">Местоположение</a></li>
+                        <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                        <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

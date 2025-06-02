@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityVibe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+    <header class="header">
+                    <nav class="navbar">
+                        <div class="navbar-container">
+                            <img src="{{ url_for('static', filename='images/logo.svg') }}" width="50" height="50" alt="Логотип">
+                            <a href="#" class="navbar-brand">City vibe</a>
+                            <div class="navbar-wrap">
+                                <ul class="navbar-menu">
+                                    <li><a href="#!"  class="active">Карта</a></li>
+                                    <li><a href="{{ url_for('index') }}">Главная</a></li>
+                                    <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                                </ul>
+                            </div>
+                            <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+                            <div class="sign-up" id="sign-up">
+                                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
+
+                                <form action="#" class="sign-up-content">
+                                    <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <div class="reg">
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="{{ url_for('static', filename='images/reg-vk.svg') }}" alt="VK Logo">
+                                            </span>
+                                            <span class="social-text">Вконтакте</span>
+                                            </button>
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="{{ url_for('static', filename='images/reg-google.svg') }}" alt="Google Logo">
+                                            </span>
+                                            <span class="social-text">Google</span>
+                                            </button>
+                                        </div>
+                                        <h4>Или</h4>
+                                        <h4><button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться</button></h4>
+                                        <label for="name">Логин</label>
+                                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                                        <label for="email">Почта</label>
+                                        <input type="email" id="email" name="email" placeholder="Ваша почта" required autocomplete="off">
+
+                                        <label for="pass">Пароль</label>
+                                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                                        <div class="buttons">
+                                            <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
+                                            <button type="button" class="signUpBtn">Войти</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up" id="register-form" style="display: none;">
+                                <span class="close" onclick="closeAllModals()">&times;</span>
+                                    <div class="sign-up-content">
+                                        <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <form class="register-form">
+                                        <label for="reg-login">Логин</label>
+                                        <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                                        <label for="reg-password">Пароль</label>
+                                        <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                                        <label for="reg-email">Почта</label>
+                                        <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                                            <div class="buttons">
+                                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                                <button type="button" id="auth-button1" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </nav>
+                </header>
+    <div class="map-filter-screen">
+        <div class="sidebar">
+            <div class="searching-container">
+                <form>
+                    <input type="textsearch" placeholder="Поиск">
+                    <button type="submit">
+                        <h4>Найти</h4>
+                    </button>
+                </form>
+            </div>
+
+            <div class="categories" >
+                <div class="categories-cnt"><img src="{{ url_for('static', filename='images/forkspoon.svg') }}" alt="Рестораны"/><div id="rest">Рестораны</div></div>
+                <div class="categories-cnt"><img src="{{ url_for('static', filename='images/glass.svg') }}" alt="Бары"/><div>Бары</div></div>
+                <div class="categories-cnt"><img src="{{ url_for('static', filename='images/dance.svg') }}" alt="Клубы"/><div>Клубы</div></div>
+                <div class="categories-cnt" id="filterBtn"><img src="{{ url_for('static', filename='images/filter.svg') }}" alt="Фильтр"/><div>Фильтр</div></div>
+            </div>
+
+            <h3 id="h3recom">Рекомендуемые</h3>
+
+    <!-- Карточка 1 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/panoram1-img.webp');"></div>
+                        <div class="card-image-map" style="background-image: url('images/panorama2-img.webp');"></div>
+                        <div class="card-image-map" style="background-image: url('images/panorma3-img.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Panorama</h3>
+                        <p>Ресторан меня это помогите помогите помогитепомогитепомогите<br><strong>Это место посетил Иван Белов</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+    <!-- Карточка 2 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/panoram1-img.webp');"></div>
+                        <div class="card-image-map" style="background-image: url('images/panorama2-img.webp');"></div>
+                        <div class="card-image-map" style="background-image: url('images/panorma3-img.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Сыроварня</h3>
+                        <p>Ресторан меня это помогите помогите помогитепомогитепомогите<br><strong>Это место посетил Иван Белов</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+    </div>
+
+            <div class="filters-panel" id="filtersPanel">
+        <div class="filter-section">
+            <h4>Сортировка</h4>
+            <div class="filter-actions">
+                <button class="apply-filters">Применить</button>
+                <button class="reset-filters">Сбросить</button>
+            </div>
+            <div class="filter-option"><input type="radio" name="sort" id="sort1"> <label for="sort1">По рейтингу</label></div>
+            <div class="filter-option"><input type="radio" name="sort" id="sort2"> <label for="sort2">По новизне</label></div>
+            <div class="filter-option"><input type="radio" name="sort" id="sort3"> <label for="sort3">По алфавиту</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Доставка</h4>
+            <div class="filter-option"><input type="checkbox" id="delivery1"> <label for="delivery1">Открыто сейчас</label></div>
+            <div class="filter-option"><input type="checkbox" id="delivery2"> <label for="delivery2">Круглосуточно</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Средний чек</h4>
+            <div class="price-range">
+                <span>400</span>
+                <input type="range" min="400" max="5000" step="100" value="2200" class="slider" id="priceRange">
+                <span>5000</span>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Вид заведения</h4>
+            <div class="filter-option"><input type="checkbox" id="type1"> <label for="type1">Бары</label></div>
+            <div class="filter-option"><input type="checkbox" id="type2"> <label for="type2">Клубы</label></div>
+            <div class="filter-option"><input type="checkbox" id="type3"> <label for="type3">Рестораны</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Кухня</h4>
+            <div class="filter-option"><input type="checkbox" id="cuisine1"> <label for="cuisine1">Итальянская</label></div>
+            <div class="filter-option"><input type="checkbox" id="cuisine2"> <label for="cuisine2">Азиатская</label></div>
+            <div class="filter-option"><input type="checkbox" id="cuisine3"> <label for="cuisine3">Европейская</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Дополнительно</h4>
+            <div class="filter-option"><input type="checkbox" id="extra1"> <label for="extra1">Wi-Fi</label></div>
+            <div class="filter-option"><input type="checkbox" id="extra2"> <label for="extra2">Vip-зал</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Рейтинг</h4>
+            <div class="filter-option"><input type="radio" name="rating" id="rating1"> <label for="rating1">от 4.5</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating2"> <label for="rating2">от 4.0</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating3"> <label for="rating3">от 3.5</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating4"> <label for="rating4">от 3.0</label></div>
+        </div>
+
+    </div>
+
+    <div class="map-filter">
+  <script type="text/javascript" charset="utf-8" async
+    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1f5175fe759a5c8393b24e3b8c32231fa0fc0a62f3dd4faef3a6f9f501ee3625&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=true">
+  </script>
+    </div>
+</div>
+<footer>
+        <nav class="footer-nav">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="nav-section">
+                        <h2>Навигация</h2>
+                        <ul class="footer-menu">
+                            <li><a href="{{ url_for('index') }}">Главная</a></li>
+                            <li><a href="{{ url_for('map') }}">Карта</a></li>
+                            <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="social-section">
+                        <h2>Социальные сети</h2>
+                        <ul class="footer-menu-media">
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tg.svg') }}"></a></li>
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tiktok.svg') }}"></a></li>
+                            <li><a href="#"><img
+                                    src="{{ url_for('static', filename='images/stash_telegram.svg') }}"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="partners-section">
+                        <h2>Партнерам</h2>
+                        <ul class="partners-list">
+                            <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                            <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="contacts-section">
+                        <h2>Контакты</h2>
+                        <ul class="contacts-list">
+                            <li><a href="#">Местоположение</a></li>
+                            <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                            <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </footer>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

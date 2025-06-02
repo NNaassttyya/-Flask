@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityVibe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+    <div class="wrapper1">
+        <main class="main">
+            <section class="main-screen">
+                <div class="slider-background">
+                    <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"
+                             style="background-image: url('{{ url_for('static', filename='images/img-club.png') }}');"></div>
+                        <div class="swiper-slide"
+                             style="background-image: url('{{ url_for('static', filename='images/img-rest.png') }}');"></div>
+                        <div class="swiper-slide"
+                             style="background-image: url('{{ url_for('static', filename='images/interer-bara-oboi-2 2.png') }}');"></div>
+                    </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <header class="header header-main">
+                    <nav class="navbar">
+                        <div class="navbar-container">
+                            <img src="{{ url_for('static', filename='images/logo.svg') }}" width="50" height="50"
+                             alt="Логотип">
+                            <a href="#" class="navbar-brand">City vibe</a>
+                            <div class="navbar-wrap">
+                            <ul class="navbar-menu">
+                                <li><a href="{{ url_for('map') }}">Карта</a></li>
+                                <li><a href="{{ url_for('index') }}" class="active">Главная</a></li>
+                                <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                            </ul>
+                            </div>
+                            <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+                            <div class="sign-up" id="sign-up">
+                                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
+
+                                <form action="#" class="sign-up-content">
+                                    <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <div class="reg">
+                                        <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="{{ url_for('static', filename='images/reg-vk.svg') }}"
+                                                   alt="VK Logo">
+                                            </span>
+                                            <span class="social-text">Вконтакте</span>
+                                        </button>
+                                        <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="{{ url_for('static', filename='images/reg-google.svg') }}"
+                                                   alt="Google Logo">
+                                            </span>
+                                            <span class="social-text">Google</span>
+                                        </button>
+                                        </div>
+                                        <h4>Или</h4>
+                                        <h4><button type="button" id="register-btn" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
+</h4>
+                                        <label for="name">Логин</label>
+                                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                                        <label for="email">Почта</label>
+                                        <input type="email" id="email" name="email" placeholder="Ваша почта" required autocomplete="off">
+
+                                        <label for="pass">Пароль</label>
+                                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                                        <div class="buttons">
+                                            <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
+                                            <button type="button" class="signUpBtn">Войти</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up" id="register-form" style="display: none;">
+                                <span class="close" onclick="closeAllModals()">&times;</span>
+                                    <div class="sign-up-content">
+                                        <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <form class="register-form">
+                                        <label for="reg-login">Логин</label>
+                                        <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                                        <label for="reg-password">Пароль</label>
+                                        <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                                        <label for="reg-email">Почта</label>
+                                        <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                                            <div class="buttons">
+                                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                                <button type="button" id="auth-button" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </nav>
+                </header>
+                <div class="main-content">
+                    <div class="main-container">
+                        <h1>Найди свое заведение</h1>
+                        <h4>Рассказываем о лучших местах с изумительной кухней в промышленном сердце России.</h4>
+                        <button class="btn-main">Подробнее</button>
+                        <div class="container-advent">
+                            <ul class="navbar-advent">
+                                <li><div>Качество</div></li>
+                                <li><div>Удобство</div></li>
+                                <li><div>Адаптация</div></li>
+                                <li><div>Уникальность</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="map-screen">
+                <div class="map-container">
+<img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A1f5175fe759a5c8393b24e3b8c32231fa0fc0a62f3dd4faef3a6f9f501ee3625&amp;width=600&amp;height=450&amp;lang=ru_RU" alt="" style="border: 0;" /></a>
+                </div>
+            </section>
+
+            <section class="about-us-screen">
+                <div class="about-us-container">
+                    <h2>О нас</h2>
+                    <div class="about-us-grid">
+                        <div class="about-text-block">
+                            <p class="onas">City Vibe — это веб-сайт для поиска мест, где можно вкусно поесть и хорошо развлечься, а также найти себе компанию на время. Он имеет удобную фильтрацию, благодаря которой упрощается поиск интересующих пользователя мест.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team">
+            <div class="team-container">
+                <h2>Наша команда</h2>
+                <div class="personal-containers">
+                    <div class="personal-card">
+                        <img src="{{ url_for('static', filename='images/vio.svg') }}" alt="Ухвакова Виолетта">
+                        <h3>Ухвакова Виолетта - программист</h3>
+                    </div>
+                    <div class="personal-card">
+                        <img src="{{ url_for('static', filename='images/nastya.svg') }}" alt="Малухина Анастасия">
+                        <h3>Малухина Анастасия - программист</h3>
+                    </div>
+                    <div class="personal-card">
+                        <img src="{{ url_for('static', filename='images/kirill.svg') }}" alt="Соколов Кирилл">
+                        <h3>Соколов Кирилл - аналитик</h3>
+                    </div>
+                    <div class="personal-card">
+                        <img src="{{ url_for('static', filename='images/yana.svg') }}" alt="Геребен Яна">
+                        <h3>Геребен Яна - тимлид</h3>
+                    </div>
+                    <div class="personal-card">
+                        <img src="{{ url_for('static', filename='images/yarik.svg') }}" alt="Ярослав Елфимов">
+                        <h3>Ярослав Елфимов - дизайнер</h3>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <h2 class="reviews-title">Отзывы наших пользователей</h2>
+
+            <div class="reviews-viewport">
+                <div class="reviews-track">
+
+                    <div class="review-card">
+                        <div class="user-info">
+                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-name">Иван Белов</div>
+                        </div>
+                        <p class="review-text">Отличный сервис! Быстро нашли мне подходящий вариант.Рекомендую всем!</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+
+
+                    <div class="review-card">
+                        <div class="user-info">
+                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-name">Мария Романова</div>
+                        </div>
+                        <p class="review-text"><p> Спасибо за работу!</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+
+
+                    <div class="review-card">
+                        <div class="user-info">
+                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-name">Дмитрий Иванов</div>
+                        </div>
+                        <p class="review-text">Пользуюсь услугами уже не первый раз. Всегда топ! Особенно хочу отметить работу программистов.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+
+
+                    <div class="review-card">
+                        <div class="user-info">
+                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-name">Анна Смирнова</div>
+                        </div>
+                        <p class="review-text">Очень приятное впечатление от заведений. Буду рекомендовать знакомым.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+
+
+                    <div class="review-card">
+                        <div class="user-info">
+                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-name">Павел Кузнецов</div>
+                        </div>
+                        <p class="review-text">Сначала сомневался, но решил попробовать. Не пожалел! Нашел хорошую и веселую компанию на вечер.</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+
+
+                <div class="reviews-nav reviews-prev">❮</div>
+                <div class="reviews-nav reviews-next">❯</div>
+            </div>
+
+
+            <div class="reviews-dots"></div>
+        </div>
+    </section>
+        </main>
+
+<footer>
+        <nav class="footer-nav">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="nav-section">
+                        <h2>Навигация</h2>
+                        <ul class="footer-menu">
+                            <li><a href="{{ url_for('index') }}">Главная</a></li>
+                            <li><a href="{{ url_for('map') }}">Карта</a></li>
+                            <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="social-section">
+                        <h2>Социальные сети</h2>
+                        <ul class="footer-menu-media">
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tg.svg') }}"></a></li>
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tiktok.svg') }}"></a></li>
+                            <li><a href="#"><img
+                                    src="{{ url_for('static', filename='images/stash_telegram.svg') }}"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="partners-section">
+                        <h2>Партнерам</h2>
+                        <ul class="partners-list">
+                            <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                            <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="contacts-section">
+                        <h2>Контакты</h2>
+                        <ul class="contacts-list">
+                            <li><a href="#">Местоположение</a></li>
+                            <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                            <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </footer>
+</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
