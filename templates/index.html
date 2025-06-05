@@ -42,30 +42,27 @@
                             <div class="sign-up" id="sign-up">
                                 <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
 
-                                <form action="#" class="sign-up-content">
+                                <form action="/" method="POST" class="sign-up-content">
                                     <div class="container-sign">
                                         <h2>City Vibe</h2>
                                         <div class="reg">
-                                        <button class="social-button">
+                                            <button type="button" class="social-button">
                                             <span class="social-icon">
-                                              <img src="{{ url_for('static', filename='images/reg-vk.svg') }}"
-                                                   alt="VK Logo">
+                                              <img src="{{ url_for('static', filename='images/reg-vk.svg') }}" alt="VK Logo">
                                             </span>
                                             <span class="social-text">Вконтакте</span>
-                                        </button>
-                                        <button class="social-button">
+                                            </button>
+                                            <button type="button" class="social-button">
                                             <span class="social-icon">
-                                              <img src="{{ url_for('static', filename='images/reg-google.svg') }}"
-                                                   alt="Google Logo">
+                                              <img src="{{ url_for('static', filename='images/reg-google.svg') }}" alt="Google Logo">
                                             </span>
                                             <span class="social-text">Google</span>
-                                        </button>
+                                            </button>
                                         </div>
                                         <h4>Или</h4>
-                                        <h4><button type="button" id="register-btn" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
-</h4>
+                                        <h4><button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться</button></h4>
                                         <label for="name">Логин</label>
-                                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+                                        <input type="text" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
 
                                         <label for="email">Почта</label>
                                         <input type="email" id="email" name="email" placeholder="Ваша почта" required autocomplete="off">
@@ -75,7 +72,7 @@
 
                                         <div class="buttons">
                                             <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
-                                            <button type="button" class="signUpBtn">Войти</button>
+                                            <button type="submit" class="signUpBtn">Войти</button>
                                         </div>
                                     </div>
                                 </form>

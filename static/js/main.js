@@ -1,4 +1,4 @@
-// Инициализация свайперов
+// Инициализация Swiper
 const swiper = new Swiper(".swiper", {
     loop: true,
     navigation: {
@@ -93,6 +93,76 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === successModal) {
                 successModal.style.display = 'none';
             }
+        });
+    }
+});
+
+// Обработчики для категорий
+const categories = document.querySelectorAll('.categories-cnt');
+categories.forEach(category => {
+    category.addEventListener('click', () => {
+        category.classList.toggle('active');
+    });
+});
+
+// Функции управления модальными окнами
+function showRegisterForm() {
+    document.getElementById('sign-up').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+}
+
+function closeAllModals() {
+    document.getElementById('sign-up').style.display = 'none';
+    document.getElementById('register-form').style.display = 'none';
+}
+
+function switchToLogin() {
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('sign-up').style.display = 'block';
+}
+
+// Основные функции авторизации
+function showLoginForm() {
+    if (isLoggedIn()) {
+        window.location.href = "profile.html";
+        return;
+    }
+    document.getElementById('sign-up').style.display = 'block';
+}
+
+function isLoggedIn() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
+
+function changeToProfileButton() {
+    // Функция для изменения кнопки на профиль
+    // Можно добавить реализацию позже
+}
+
+// Обработка формы регистрации
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.querySelector('.register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('name', document.getElementById('reg-login').value);
+            formData.append('email', document.getElementById('reg-email').value);
+            formData.append('pass', document.getElementById('reg-password').value);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка при регистрации');
+            });
         });
     }
 });
