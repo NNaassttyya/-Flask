@@ -242,22 +242,84 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
+      <header class="header">
+            <nav class="navbar">
             <div class="navbar-container">
-                <img src="{{ url_for('static', filename='images/logo.svg') }}" width="50" height="50" alt="Логотип">
-                <a href="#" class="navbar-brand">City vibe</a>
-                <div class="navbar-wrap">
-                    <ul class="navbar-menu">
-                        <li><a href="#!" class="active">Карта</a></li>
-                        <li><a href="{{ url_for('index') }}">Главная</a></li>
-                        <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
-                    </ul>
-                </div>
-                <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
-            </div>
-        </nav>
-    </header>
+                            <img src="images/logo.svg" width="50" height="50" alt="Логотип">
+                            <a href="#" class="navbar-brand">City vibe</a>
+                            <div class="navbar-wrap">
+                                <ul class="navbar-menu">
+                                    <li><a href="#!" class="active" >Карта</a></li>
+                                    <li><a href="maincityvibe.html">Главная</a></li>
+                                    <li><a href="support.html">Тех поддержка</a></li>
+                                </ul>
+                            </div>
+                            <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+                            <div class="sign-up" id="sign-up">
+                                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
+
+                                <form action="#" class="sign-up-content">
+                                    <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <div class="reg">
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-vk.svg" alt="VK Logo">
+                                            </span>
+                                            <span class="social-text">Вконтакте</span>
+                                            </button>
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-google.svg" alt="Google Logo">
+                                            </span>
+                                            <span class="social-text">Google</span>
+                                            </button>
+                                        </div>
+                                        <h4>Или</h4>
+                                        <h4><button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться</button></h4>
+                                        <label for="name">Логин</label>
+                                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                                        <label for="email">Почта</label>
+                                        <input type="email" id="email" name="email" placeholder="Ваша почта" required autocomplete="off">
+
+                                        <label for="pass">Пароль</label>
+                                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                                        <div class="buttons">
+                                            <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
+                                            <button type="button" class="signUpBtn">Войти</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up" id="register-form" style="display: none;">
+                                <span class="close" onclick="closeAllModals()">&times;</span>
+                                    <div class="sign-up-content">
+                                        <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <form class="register-form">
+                                        <label for="reg-login">Логин</label>
+                                        <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                                        <label for="reg-password">Пароль</label>
+                                        <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                                        <label for="reg-email">Почта</label>
+                                        <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                                            <div class="buttons">
+                                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                                <button type="button" id="auth-button" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </nav>
+                </header>
 
     <div class="map-filter-screen">
         <div class="sidebar">
@@ -284,15 +346,13 @@
                 <div class="card-image-container">
                     <div class="card-images" data-index="0">
                         <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/panorama1.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/panorama2.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/panorama3.jpg') }}');"></div>
                     </div>
                     <span class="heart">❤</span>
                 </div>
                 <div>
-                    <h3>Panorama</h3>
-                    <p>Ресторан с панорамным видом на город. Европейская и азиатская кухня.<br><strong>Сейчас здесь: 12 человек</strong></p>
-                    <button class="btn-card">Подробнее</button>
+                      <h3>Panorama</h3>
+                        <p>Panorama - панорамный ресторан в Екатеринбурге на 50 этаже.<br><strong>Это место посетила группа Rammstein</strong></p>
+                        <button class="btn-card" onclick="window.location.href='panorama-page.html'">Подробнее</button>
                 </div>
             </div>
 
@@ -300,23 +360,201 @@
                 <div class="card-image-container">
                     <div class="card-images" data-index="0">
                         <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya1.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya2.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya3.jpg') }}');"></div>
                     </div>
                     <span class="heart">❤</span>
                 </div>
                 <div>
-                    <h3>Сыроварня</h3>
-                    <p>Ресторан итальянской кухни с собственным производством сыров.<br><strong>Сейчас здесь: 8 человек</strong></p>
-                    <button class="btn-card">Подробнее</button>
+                      <h3>Сыроварня</h3>
+                        <p>Сыроварня - идеальное место для спокойного проведения досуга, деловой или личной встречи, юбилея в большой компании.<br><strong>Это место посетил артист и певец Олег Газманов</strong></p>
+                        <button class="btn-card">Подробнее</button>
                 </div>
+            </div>
+                        <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/ruki-up.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Руки Вверх бар</h3>
+                        <p>Руки Вверх бар - популярное место для дней рождений и веселых праздничных банкетов. Для именинников действуют специальные выгодные предложения!<br><strong>Это место посетили Руки вверх Отпетые Мошенники, Feduk, Винтаж и др.</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/nebar.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Nebar</h3>
+                        <p>Nebar — легендарный клуб с двумя танцполами: слева — флирт и коктейли, справа — безумные вечеринки без правил.<br><strong>Это место посетил ведущий Егор Панин</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/ben-hall.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Ben Hall</h3>
+                        <p>Ben Hall — это бар, паб, ночной клуб и банкетный зал, расположенный в центре города. Он стилизован под старую Англию и предлагает своим гостям широкий выбор пива, а также вкусные бургеры и картошку..<br><strong>Это место посетили Сергей Бабкин из «Пятницы», Евгений Маргулис из «Машины времени» и др.</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+    </div>
+
+    <div class="filters-panel" id="filtersPanel">
+        <div class="filter-section">
+            <h4>Сортировка</h4>
+            <div class="filter-actions">
+                <button class="apply-filters">Применить</button>
+                <button class="reset-filters">Сбросить</button>
+            </div>
+
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-option"><input type="radio" name="sort" id="sort1"> <label for="sort1">Открыто сейчас</label></div>
+            <div class="filter-option"><input type="radio" name="sort" id="sort2"> <label for="sort2">С сайтом</label></div>
+            <div class="filter-option"><input type="radio" name="sort" id="sort3"> <label for="sort3">Доставка</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Средний чек</h4>
+            <div class="price-range">
+                <span>400</span>
+                <input type="range" min="400" max="5000" step="100" value="2200" class="slider" id="priceRange">
+                <span>5000</span>
             </div>
         </div>
 
-        <div class="map-filter">
-            <div id="map" style="width: 100%; height: 100%;"></div>
+        <div class="filter-section">
+            <h4>Вид заведения</h4>
+            <div class="filter-option"><input type="checkbox" id="type1"> <label for="type1">Бары</label></div>
+            <div class="filter-option"><input type="checkbox" id="type2"> <label for="type2">Клубы</label></div>
+            <div class="filter-option"><input type="checkbox" id="type3"> <label for="type3">Рестораны</label></div>
         </div>
+
+        <div class="filter-section">
+            <h4>Кухня</h4>
+            <div class="filter-option"><input type="checkbox" id="cuisine1"> <label for="cuisine1">Итальянская</label></div>
+            <div class="filter-option"><input type="checkbox" id="cuisine2"> <label for="cuisine2">Азиатская</label></div>
+            <div class="filter-option"><input type="checkbox" id="cuisine3"> <label for="cuisine3">Европейская</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Дополнительно</h4>
+            <div class="filter-option"><input type="checkbox" id="extra1"> <label for="extra1">Wi-Fi</label></div>
+            <div class="filter-option"><input type="checkbox" id="extra2"> <label for="extra2">Vip-зал</label></div>
+        </div>
+
+        <div class="filter-section">
+            <h4>Рейтинг</h4>
+            <div class="filter-option"><input type="radio" name="rating" id="rating1"> <label for="rating1">от 4.5</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating2"> <label for="rating2">от 4.0</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating3"> <label for="rating3">от 3.5</label></div>
+            <div class="filter-option"><input type="radio" name="rating" id="rating4"> <label for="rating4">от 3.0</label></div>
+        </div>
+
     </div>
+
+    <div class="map-filter">
+  <script type="text/javascript" charset="utf-8" async 
+    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1f5175fe759a5c8393b24e3b8c32231fa0fc0a62f3dd4faef3a6f9f501ee3625&amp;width=100%&amp;height=100%&amp;lang=ru_RU&amp;scroll=true">
+  </script>
+    </div>
+
+    </div>
+        <footer>
+            <nav class="footer-nav">
+                <div class="footer-container">
+                    <div class="footer-grid">
+                        <div class="nav-section">
+                            <h2>Навигация</h2>
+                            <ul class="footer-menu">
+                                <li><a href="maincityvibe.html">Главная</a></li>
+                                <li><a href="restaurants.html">Карта</a></li>
+                                <li><a href="support.html">Тех поддержка</a></li>
+                            </ul>
+                        </div>
+        
+                        <div class="social-section">
+                            <h2>Социальные сети</h2>
+                            <ul class="footer-menu-media">
+                                <li><a href="#"><img src="images/tg.svg"></a></li>
+                                <li><a href="#"><img src="images/tiktok.svg"></a></li>
+                                <li><a href="#"><img src="images/stash_telegram.svg"></a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="partners-section">
+                            <h2>Партнерам</h2>
+                            <ul class="partners-list">
+                                <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                                <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                            </ul>
+                        </div>
+        
+                        <div class="contacts-section">
+                            <h2>Контакты</h2>
+                            <ul class="contacts-list">
+                                <li><a href="#">Местоположение</a></li>
+                                <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                                <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const filterBtn = document.getElementById('filterBtn');
+    const filtersPanel = document.getElementById('filtersPanel');
+    const mapFilter = document.querySelector('.map-filter');
+
+    filterBtn.addEventListener('click', function() {
+        filtersPanel.classList.toggle('show');
+        
+        // Пересчитываем ширину карты
+        if (filtersPanel.classList.contains('show')) {
+            mapFilter.style.width = 'calc(60% - 300px)';
+        } else {
+            mapFilter.style.width = '60%';
+        }
+    });
+
+    // Обработчики для кнопок фильтров
+    document.querySelector('.apply-filters').addEventListener('click', function() {
+        // Здесь будет логика применения фильтров
+        alert('Фильтры применены!');
+    });
+
+    document.querySelector('.reset-filters').addEventListener('click', function() {
+        // Сброс всех чекбоксов и радио-кнопок
+        const inputs = filtersPanel.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.type === 'checkbox') {
+                input.checked = false;
+            } else if (input.type === 'radio') {
+                input.checked = false;
+            } else if (input.type === 'range') {
+                input.value = (parseInt(input.max) + parseInt(input.min)) / 2;
+            }
+        });
+    });
+});
+
+</script>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
