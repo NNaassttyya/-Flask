@@ -1,10 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityVibe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css/mainstyle.css">
 </head>
 <body>
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" width="50" height="50" alt="Логотип">
+            <a href="#" class="navbar-brand">City vibe</a>
+            <div class="navbar-wrap">
+                <ul class="navbar-menu">
+                    <li><a href="{{ url_for('map') }}">Карта</a></li>
+                    <li><a href="{{ url_for('index') }}">Главная</a></li>
+                    <li><a href="{{ url_for('support') }" class="active">Тех поддержка</a></li>
+                </ul>
+            </div>
+            <a class="entrance" href="#" id="auth-button"
+               onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+            <div class="sign-up" id="sign-up">
+                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
 
+                <form action="#" class="sign-up-content">
+                    <div class="container-sign">
+                        <h2>City Vibe</h2>
+                        <div class="reg">
+                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-vk.svg" alt="VK Logo">
+                                            </span>
+                                <span class="social-text">Вконтакте</span>
+                            </button>
+                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-google.svg" alt="Google Logo">
+                                            </span>
+                                <span class="social-text">Google</span>
+                            </button>
+                        </div>
+                        <h4>Или</h4>
+                        <h4>
+                            <button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться
+                            </button>
+                        </h4>
+                        <label for="name">Логин</label>
+                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                        <label for="email">Почта</label>
+                        <input type="email" id="email" name="email" placeholder="Ваша почта" required
+                               autocomplete="off">
+
+                        <label for="pass">Пароль</label>
+                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                        <div class="buttons">
+                            <button type="button" class="cancelBtn"
+                                    onclick="document.getElementById('sign-up').style.display='none'">Закрыть
+                            </button>
+                            <button type="button" class="signUpBtn">Войти</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="sign-up" id="register-form" style="display: none;">
+                <span class="close" onclick="closeAllModals()">&times;</span>
+                <div class="sign-up-content">
+                    <div class="container-sign">
+                        <h2>City Vibe</h2>
+                        <form class="register-form">
+                            <label for="reg-login">Логин</label>
+                            <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                            <label for="reg-password">Пароль</label>
+                            <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                            <label for="reg-email">Почта</label>
+                            <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                            <div class="buttons">
+                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                <button type="button" id="auth-button1" class="register-btn" onclick="registerUser()">
+                                    Зарегистрироваться
+                                </button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+    <main class="lobby-container">
+        <div class="lobby-header">
+            <h1>Panorama A.S.P.</h1>
+            <button class="create-lobby-btn" onclick="createLobby()">Создать лобби</button>
+        </div>
+
+        <div class="lobby-list">
+            <!-- Лобби 1 -->
+            <div class="lobby-card">
+                <div class="lobby-members">
+                    <div class="member-avatar" style="background-color: #ff7675;"></div>
+                    <div class="member-avatar" style="background-color: #74b9ff;"></div>
+                    <div class="member-avatar" style="background-color: #55efc4;"></div>
+                    <div class="member-avatar" style="background-color: #a29bfe;"></div>
+                    <div class="member-avatar" style="background-color: #ffeaa7;"></div>
+                    <div class="join-spot">+</div>
+                </div>
+                <div class="lobby-info">
+                    <button class="join-btn">Присоединиться</button>
+                    <button class="view-description" onclick="showLobbyDescription(1)">Описание лобби</button>
+                </div>
+            </div>
+
+            <!-- Лобби 2 -->
+            <div class="lobby-card">
+                <div class="lobby-members">
+                    <div class="member-avatar" style="background-color: #fab1a0;"></div>
+                    <div class="member-avatar" style="background-color: #0984e3;"></div>
+                    <div class="join-spot">+</div>
+                </div>
+                <div class="lobby-info">
+                    <button class="join-btn">Присоединиться</button>
+                    <button class="view-description" onclick="showLobbyDescription(2)">Описание лобби</button>
+                </div>
+            </div>
+
+            <!-- Лобби 3 -->
+            <div class="lobby-card">
+                <div class="lobby-members">
+                    <div class="member-avatar" style="background-color: #00b894;"></div>
+                    <div class="member-avatar" style="background-color: #6c5ce7;"></div>
+                    <div class="member-avatar" style="background-color: #fdcb6e;"></div>
+                    <div class="join-spot">+</div>
+                </div>
+                <div class="lobby-info">
+                    <button class="join-btn">Присоединиться</button>
+                    <button class="view-description" onclick="showLobbyDescription(3)">Описание лобби</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Попап с описанием лобби -->
+        <div class="lobby-description-popup" id="lobbyDescriptionPopup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+                <h3 id="popupTitle">Описание лобби</h3>
+                <p id="popupDescription">Загрузка описания...</p>
+                <button class="join-btn-popup" onclick="joinLobby()">Присоединиться</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Загрузка сохраненных данных при открытии страницы
+            const savedFirstName = localStorage.getItem('profileFirstName');
+            const savedLastName = localStorage.getItem('profileLastName');
+            const savedAge = localStorage.getItem('profileAge');
+            
+            if (savedFirstName) document.getElementById('firstName-profile').value = savedFirstName;
+            if (savedLastName) document.getElementById('lastName-profile').value = savedLastName;
+            if (savedAge) document.getElementById('age').value = savedAge;
+            if (savedFirstName && savedLastName) {
+                document.getElementById('userName').textContent = `${savedFirstName} ${savedLastName}`;
+            }
+        });
+        // Данные лобби (в реальном приложении будут приходить с сервера)
+const lobbiesData = {
+    1: {
+        title: "Вечерний ужин с новыми знакомствами",
+        description: "Ищем компанию для приятного вечера в Panorama. Планируем заказать несколько блюд на компанию. Возраст 25-35 лет."
+    },
+    2: {
+        title: "Дегустация вин",
+        description: "Собираемся попробовать новые сорта вин. Присоединяйтесь, если любите хорошие вина и приятные беседы."
+    },
+    3: {
+        title: "Бизнес-ланч",
+        description: "Ищу коллег для делового обеда. Обсудим возможные проекты и сотрудничество."
+    }
+};
+
+// Показать описание лобби
+function showLobbyDescription(lobbyId) {
+    const popup = document.getElementById('lobbyDescriptionPopup');
+    const title = document.getElementById('popupTitle');
+    const description = document.getElementById('popupDescription');
+    
+    title.textContent = lobbiesData[lobbyId].title;
+    description.textContent = lobbiesData[lobbyId].description;
+    
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Закрыть попап
+function closePopup() {
+    document.getElementById('lobbyDescriptionPopup').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Присоединиться к лобби
+function joinLobby() {
+    alert('Вы успешно присоединились к лобби!');
+    closePopup();
+    // Здесь будет код для добавления пользователя в лобби
+}
+
+// Создать новое лобби
+function createLobby() {
+    window.location.href = "create-lobby.html";
+}
+
+// Закрытие попапа при клике вне его
+document.getElementById('lobbyDescriptionPopup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePopup();
+    }
+});
+
+// Инициализация страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Здесь может быть код для загрузки лобби с сервера
+});
+    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
