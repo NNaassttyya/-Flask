@@ -169,65 +169,65 @@
     <section class="reviews-section">
         <div class="reviews-container">
             <h2 class="reviews-title">Отзывы наших пользователей</h2>
-
+            
             <div class="reviews-viewport">
                 <div class="reviews-track">
 
                     <div class="review-card">
                         <div class="user-info">
-                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-avatar"><img src="images/userimage.svg"></div>
                             <div class="user-name">Иван Белов</div>
                         </div>
                         <p class="review-text">Отличный сервис! Быстро нашли мне подходящий вариант.Рекомендую всем!</p>
                         <div class="rating">★★★★★</div>
                     </div>
-
-
+                    
+   
                     <div class="review-card">
                         <div class="user-info">
-                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-avatar"><img src="images/userimage.svg"></div>
                             <div class="user-name">Мария Романова</div>
                         </div>
                         <p class="review-text"><p> Спасибо за работу!</p>
                         <div class="rating">★★★★★</div>
                     </div>
-
-
+                    
+     
                     <div class="review-card">
                         <div class="user-info">
-                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-avatar"><img src="images/userimage.svg"></div>
                             <div class="user-name">Дмитрий Иванов</div>
                         </div>
                         <p class="review-text">Пользуюсь услугами уже не первый раз. Всегда топ! Особенно хочу отметить работу программистов.</p>
                         <div class="rating">★★★★★</div>
                     </div>
-
-
+                    
+   
                     <div class="review-card">
                         <div class="user-info">
-                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-avatar"><img src="images/userimage.svg"></div>
                             <div class="user-name">Анна Смирнова</div>
                         </div>
                         <p class="review-text">Очень приятное впечатление от заведений. Буду рекомендовать знакомым.</p>
                         <div class="rating">★★★★★</div>
                     </div>
-
-
+                    
+    
                     <div class="review-card">
                         <div class="user-info">
-                            <div class="user-avatar"><img src="{{ url_for('static', filename='images/userimage.svg') }}"></div>
+                            <div class="user-avatar"><img src="images/userimage.svg"></div>
                             <div class="user-name">Павел Кузнецов</div>
                         </div>
                         <p class="review-text">Сначала сомневался, но решил попробовать. Не пожалел! Нашел хорошую и веселую компанию на вечер.</p>
                         <div class="rating">★★★★★</div>
                     </div>
                 </div>
-
+                
 
                 <div class="reviews-nav reviews-prev">❮</div>
                 <div class="reviews-nav reviews-next">❯</div>
             </div>
-
+            
 
             <div class="reviews-dots"></div>
         </div>
@@ -282,6 +282,127 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.reviews-track');
+            const cards = document.querySelectorAll('.review-card');
+            const prevBtn = document.querySelector('.reviews-prev');
+            const nextBtn = document.querySelector('.reviews-next');
+            const dotsContainer = document.querySelector('.reviews-dots');
+            
+            let currentIndex = 0;
+            let cardWidth = cards[0].offsetWidth + 20; // Ширина карточки + margin
+            let visibleCards = 3; // Количество видимых карточек по умолчанию
+            
+            // Создаем точки пагинации
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                const dotCount = Math.ceil(cards.length / visibleCards);
+                
+                for (let i = 0; i < dotCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('reviews-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            
+            // Переход к конкретному слайду
+            function goToSlide(index) {
+                currentIndex = index;
+                updateSlider();
+            }
+            
+            // Обновление позиции слайдера
+            function updateSlider() {
+                const newPosition = -currentIndex * cardWidth * visibleCards;
+                track.style.transform = `translateX(${newPosition}px)`;
+                
+                // Обновляем активную точку
+                const dots = document.querySelectorAll('.reviews-dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+                
+                // Проверяем, нужно ли скрывать кнопки
+                prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+                nextBtn.style.display = currentIndex >= cards.length / visibleCards - 1 ? 'none' : 'flex';
+            }
+            
+            // Проверяем количество видимых карточек в зависимости от ширины экрана
+            function checkVisibleCards() {
+                if (window.innerWidth <= 768) {
+                    visibleCards = 1;
+                } else if (window.innerWidth <= 1024) {
+                    visibleCards = 2;
+                } else {
+                    visibleCards = 3;
+                }
+                
+                cardWidth = cards[0].offsetWidth + 20;
+                createDots();
+                updateSlider();
+            }
+            
+            // Обработчики событий
+            prevBtn.addEventListener('click', function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlider();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentIndex < Math.ceil(cards.length / visibleCards) - 1) {
+                    currentIndex++;
+                    updateSlider();
+                }
+            });
+            
+            // Инициализация
+            checkVisibleCards();
+            window.addEventListener('resize', checkVisibleCards);
+            
+            // Добавляем обработчик для свайпа на мобильных устройствах
+            let startX, moveX;
+            const viewport = document.querySelector('.reviews-viewport');
+            
+            viewport.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            }, {passive: true});
+            
+            viewport.addEventListener('touchmove', function(e) {
+                if (!startX) return;
+                moveX = e.touches[0].clientX;
+                const diff = startX - moveX;
+                
+                // Блокируем вертикальный скролл при горизонтальном свайпе
+                if (Math.abs(diff) > 5) {
+                    e.preventDefault();
+                }
+            }, {passive: false});
+            
+            viewport.addEventListener('touchend', function(e) {
+                if (!startX || !moveX) return;
+                
+                const diff = startX - moveX;
+                
+                // Определяем направление свайпа
+                if (diff > 50 && currentIndex < Math.ceil(cards.length / visibleCards) - 1) {
+                    // Свайп влево - следующий слайд
+                    currentIndex++;
+                    updateSlider();
+                } else if (diff < -50 && currentIndex > 0) {
+                    // Свайп вправо - предыдущий слайд
+                    currentIndex--;
+                    updateSlider();
+                }
+                
+                startX = null;
+                moveX = null;
+            }, {passive: true});
+        });
+    </script>
 </body>
 </html>
