@@ -1,10 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityVibe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css/mainstyle.css">
 </head>
 <body>
+    <header class="header">
+                    <nav class="navbar">
+                        <div class="navbar-container">
+                            <img src="images/logo.svg" width="50" height="50" alt="Логотип">
+                            <a href="#" class="navbar-brand">City vibe</a>
+                            <div class="navbar-wrap">
+                                <ul class="navbar-menu">
+                                    <li><a href="map.html"  >Карта</a></li>
+                                    <li><a href="maincityvibe.html">Главная</a></li>
+                                    <li><a href="#!"  class="active">Тех поддержка</a></li>
+                                </ul>
+                            </div>
+                            <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
+                            <div class="sign-up" id="sign-up">
+                                <span class="close" onclick="document.getElementById('sign-up').style.display='none'">&times;</span>
+
+                                <form action="#" class="sign-up-content">
+                                    <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <div class="reg">
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-vk.svg" alt="VK Logo">
+                                            </span>
+                                            <span class="social-text">Вконтакте</span>
+                                            </button>
+                                            <button class="social-button">
+                                            <span class="social-icon">
+                                              <img src="images/reg-google.svg" alt="Google Logo">
+                                            </span>
+                                            <span class="social-text">Google</span>
+                                            </button>
+                                        </div>
+                                        <h4>Или</h4>
+                                        <h4><button type="button" class="register" onclick="showRegisterForm()">Зарегестрироваться</button></h4>
+                                        <label for="name">Логин</label>
+                                        <input type="name" id="name" name="name" placeholder="Ваш логин" required autocomplete="off">
+
+                                        <label for="email">Почта</label>
+                                        <input type="email" id="email" name="email" placeholder="Ваша почта" required autocomplete="off">
+
+                                        <label for="pass">Пароль</label>
+                                        <input type="password" id="pass" name="pass" placeholder="******" required>
+
+                                        <div class="buttons">
+                                            <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
+                                            <button type="button" class="signUpBtn">Войти</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up" id="register-form" style="display: none;">
+                                <span class="close" onclick="closeAllModals()">&times;</span>
+                                    <div class="sign-up-content">
+                                        <div class="container-sign">
+                                        <h2>City Vibe</h2>
+                                        <form class="register-form">
+                                        <label for="reg-login">Логин</label>
+                                        <input type="text" id="reg-login" placeholder="Придумайте логин" required>
+
+                                        <label for="reg-password">Пароль</label>
+                                        <input type="password" id="reg-password" placeholder="Придумайте пароль" required>
+
+                                        <label for="reg-email">Почта</label>
+                                        <input type="email" id="reg-email" placeholder="Ваша почта" required>
+                                            <div class="buttons">
+                                                <button type="button" class="cancelBtn" onclick="switchToLogin()">Назад</button>
+                                                <button type="button" id="auth-button" class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </nav>
+        </header>
+
+
+
+    <div class="container-panorama">
+
+    <!-- Слайдер -->
+                <div class="slider-background-pages">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="background-image: url(images/panoram1-img.webp);"></div>
+                            <div class="swiper-slide" style="background-image: url(images/panoram2-img.webp);"></div>
+                            <div class="swiper-slide" style="background-image: url(images/panoram3-img.jfif);"></div>
+                            <div class="swiper-slide" style="background-image: url(images/panoram4-img.webp);"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div> 
+                    </div>
+                        <div class="swiper-pagination"></div> 
+                </div>
+    <!-- Основной блок -->
+    <div class="main-info">
+      <div class="info">
+        <h2>Информация</h2>
+        <p>Ресторан Panorama A.S.P. предлагает своим гостям впечатляющий панорамный вид на ночной город. Городская подсветка завораживает: огни сверкают, как звезды, а здания и улицы становятся частью ночной сказки.
+            Привлекательная черта ресторана Panorama ASP — «живая витрина» с морепродуктами: устрицы, морские ежи, моллюски, океаническая и морская рыба.
+
+            Ресторан получил свое название не случайно – с 50-го этажа БЦ «Высоцкий» - открывается великолепный вид на город. У гостей ресторана появляется возможность оказаться не только на вершине вкуса, но и подняться над повседневностью.</p>
+      </div>
+      <div class="contact-card">
+        <h3>Panorama</h3>
+        <p>Контакты</p>
+       <p>+7 (343) 298‒98‒88</p>
+       <a href="https://panorama-asp.ru/">panorama-asp.ru</a>
+       <p>panorama.ekb@mail.ru</p>
+       <a href="https://t.me/panoramaasp50">Телеграмм-канал</a>
+       
+      </div>
+    </div>
+
+    <!-- Карта -->
+    <div class="map-block">
+        <h2>Местоположение</h2>
+        <div class="block-add">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A761cab5295838072b4e866a7eec9a8ef96a622df10af1a7898910c25e2f7afb9&amp;source=constructor" width="500" height="300" frameborder="0"></iframe>
+            <div class="address-panorama">
+                <div class="location">
+                    <img src="images/ph_map-pin.svg">
+                    <p><i class="fas fa-location-dot"></i> ул. Малышева, 51 • этаж 50</p>
+                </div>
+                <div class="clock">
+                    <img src="images/mdi_clock-outline.svg">
+                    <p><i class="fas fa-clock"></i> Часы работы: Ежедневно с 12:00 до 00:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Отзывы -->
+    <div class="reviews-panorama">
+      <h2>Отзывы</h2>
+      <div class="rating-overall">
+        <strong>4.9</strong><span>⭐</span>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <strong>Белов Иван</strong>
+          <span>5⭐</span>
+        </div>
+        <p>Был весьма приятно, но это не значит, что ребята стоит расслабляться. Заказ был достаточно долгим, но ожидание после пиццы стоит того, в сочетании с уютом это классный вечер.</p>
+      </div>
+
+      <button class="review-button">Написать отзыв</button>
+    </div>
+  </div>
+
+                 
+         <footer>
+            <nav class="footer-nav">
+                <div class="footer-container">
+                    <div class="footer-grid">
+                        <div class="nav-section">
+                            <h2>Навигация</h2>
+                            <ul class="footer-menu">
+                                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                                <li><a href="{{ url_for('map') }}">Карта</a></li>
+                                <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="social-section">
+                            <h2>Социальные сети</h2>
+                            <ul class="footer-menu-media">
+                                <li><a href="#"><img src="images/tg.svg"></a></li>
+                                <li><a href="#"><img src="images/tiktok.svg"></a></li>
+                                <li><a href="#"><img src="images/stash_telegram.svg"></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="partners-section">
+                            <h2>Партнерам</h2>
+                            <ul class="partners-list">
+                                <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                                <li><a href="mailto:Cityvibe@gmail.com">Cityvibe@gmail.com</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="contacts-section">
+                            <h2>Контакты</h2>
+                            <ul class="contacts-list">
+                                <li><a href="#">Местоположение</a></li>
+                                <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                                <li><a href="tel:+79001111111">+7-900-111-11-11</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            </footer>
+            <div class="popup-overlay" id="companionPopup">
+                <div class="popup-content">
+                    <h3>Хотите ли найти себе компанию для посещения этого места?</h3>
+                    <div class="popup-buttons">
+                    <button class="popup-btn yes-btn" onclick="findCompanion()">Да, ищу компанию</button>
+                    <button class="popup-btn no-btn" onclick="closePopup()">Нет, спасибо</button>
+                    </div>
+                </div>
+            </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
 
 </body>
 </html>
