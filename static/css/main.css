@@ -57,6 +57,12 @@ header {
     z-index: 20;
     box-shadow: none;
 }
+
+#auth-button{
+    font-weight: 700;
+    font-size: 19px;
+}
+
 header{
     background-color: #2D2D2D;
 }
@@ -147,7 +153,7 @@ button[type=button]{
     font-weight: 700;
     font-size: 20px;
 }
-button.register {
+button.register{
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     background-color: #191919;
@@ -218,11 +224,11 @@ input[type=email], input[type=password],input[type=name], input[type=text]{
     width: 100%;
     justify-content: center;
   }
-
+  
 .social-button:hover {
     opacity: 0.8;
   }
-
+  
 .social-icon {
     display: flex;
     align-items: center;
@@ -274,8 +280,8 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
     cursor: pointer;
 }
 .container-sign {
-    max-height: 80vh; /* Ограничивает высоту до 80% от высоты окна */
-    overflow-y: auto; /* Включает вертикальную прокрутку при необходимости */
+    max-height: 80vh; 
+    overflow-y: auto; 
     padding: 1.6rem;
   }
 /* Main */
@@ -381,7 +387,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
     font-weight: 400;
     max-width: 670px;
 }
-.swiper-pagination-bullet{
+.slider-background .swiper-pagination-bullet{
     width: 416px;
     height: 15px;
     border-radius: 10px;
@@ -535,26 +541,26 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
             background: #ffffff;
             position: relative;
         }
-
+        
         .reviews-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
         }
-
+        
         .reviews-title {
             margin-bottom: 40px;
             color: #000000;
         }
-
+        
         .reviews-track {
             display: flex;
             transition: transform 0.5s ease;
             will-change: transform;
             padding: 10px 0;
         }
-
+        
         .review-card {
             flex: 0 0 calc(33.333% - 20px);
             margin: 0 10px;
@@ -564,18 +570,18 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .review-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-
+        
         .user-info {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-
+        
         .user-avatar {
             width: 50px;
             height: 50px;
@@ -588,25 +594,25 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
             font-size: 18px;
             margin-right: 15px;
         }
-
+        
         .user-name {
             font-weight: 600;
             font-size: 18px;
             color: #333;
         }
-
+        
         .review-text {
             color: #555;
             line-height: 1.5;
             margin-bottom: 15px;
         }
-
+        
         .rating {
             color: #ffc107;
             font-size: 20px;
             margin-top: auto;
         }
-
+        
         .reviews-nav {
             position: absolute;
             top: 50%;
@@ -623,25 +629,25 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
             z-index: 10;
             transition: all 0.3s ease;
         }
-
+        
         .reviews-nav:hover {
             color: #606060;
         }
-
+        
         .reviews-prev {
             left: 0;
         }
-
+        
         .reviews-next {
             right: 0;
         }
-
+        
         .reviews-dots {
             display: flex;
             justify-content: center;
             margin-top: 30px;
         }
-
+        
         .reviews-dot {
             width: 20px;
             height: 5px;
@@ -651,28 +657,28 @@ input[type=email]:focus, input[type=password]:focus, input[type=name]:focus, inp
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .reviews-dot.active {
             background: #000000;
             transform: scale(1.2);
         }
-
+        
         .reviews-viewport {
             overflow: hidden;
             position: relative;
         }
-
+        
         @media (max-width: 1024px) {
             .review-card {
                 flex: 0 0 calc(50% - 20px);
             }
         }
-
+        
         @media (max-width: 768px) {
             .review-card {
                 flex: 0 0 calc(100% - 20px);
             }
-
+            
             .reviews-nav {
                 display: none;
             }
@@ -757,7 +763,7 @@ a[href^="tel:"] {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-
+    
     .footer-container {
         padding: 0 15px;
     }
@@ -854,7 +860,7 @@ a[href^="tel:"] {
     justify-content: center;
     align-items: center;
 }
-
+        
 .modal-content {
     background-color: white;
     padding: 30px;
@@ -863,17 +869,17 @@ a[href^="tel:"] {
     max-width: 400px;
     animation: fadeIn 0.3s;
 }
-
+        
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
+        
 .modal-content h3 {
     margin-bottom: 20px;
     color: #191919;
 }
-
+        
 .modal-close {
     background-color: #191919;
     color: white;
@@ -886,11 +892,11 @@ a[href^="tel:"] {
     font-weight: 700;
     font-size: 14px;
 }
-
+        
 .form-Btn {
     transition: all 0.3s ease;
 }
-
+        
 .form-Btn:active {
     transform: scale(0.95);
 }
@@ -907,11 +913,11 @@ a[href^="tel:"] {
     }
 .map-filter-screen{
     display: flex;
-}
+} 
 .map-filter-screen h3{
     font-size: 24px;
     font-weight: 500;
-}
+}  
 .map-filter {
       margin: 0;
       display: flex;
@@ -980,29 +986,30 @@ a[href^="tel:"] {
 
 
 /* Стили для карточек рекомендаций */
-.card {
+/* .card {
   display: flex;
   gap: 20px;
   padding: 15px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
 }
 
 .card-image-container {
   width: 40%;
   position: relative;
-  flex-shrink: 0;
+  flex-shrink: 0; 
 }
 
 .card-image-map {
   width: 100%;
-  height: 100%;
+  height: 29vh;
   background-size: cover;
   background-position: center;
   border-radius: 8px;
 }
+
 
 .card-content {
   flex: 1;
@@ -1013,19 +1020,18 @@ a[href^="tel:"] {
 .card h3 {
   margin: 0 0 10px 0;
   font-size: 18px;
-  color: #333;
+  color: #000000;
 }
 
 .card p {
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
   color: #555;
-  line-height: 1.4;
   flex-grow: 1;
 }
 
 .btn-card {
   align-self: flex-start;
-  padding: 8px 16px;
+  padding: 8px 10px;
   background-color: #4a6bff;
   color: white;
   border: none;
@@ -1035,7 +1041,6 @@ a[href^="tel:"] {
 }
 
 .heart {
-  position: absolute;
   top: 10px;
   right: 10px;
   color: white;
@@ -1049,7 +1054,7 @@ a[href^="tel:"] {
   .card {
     flex-direction: column;
   }
-
+  
   .card-image-container {
     width: 100%;
     height: 200px;
@@ -1062,13 +1067,12 @@ a[href^="tel:"] {
 
 
 
-    .heart {
-      position: absolute;
+    /* .heart {
       top: 10px;
       right: 10px;
       color: rgb(255, 255, 255);
       font-size: 20px;
-    }
+    } */
 
     .card h3 {
       margin: 10px 0px;
@@ -1145,7 +1149,7 @@ a[href^="tel:"] {
 .filter-actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .apply-filters, .reset-filters {
@@ -1174,136 +1178,9 @@ a[href^="tel:"] {
 /* Адаптация карты при открытых фильтрах */
 .filters-panel.show ~ .map-filter {
     width: calc(60% - 300px);
-
-
-
-
-
-
-
-/* Общее оформление модального окна */
-#register-form{
-  display: none;
-  position: fixed;
-  z-index: 450;
-  left: 0;
-  top: 0;
-  width: 100%;
-  min-height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding-top: 2rem;
-  animation: fadeIn 0.3s ease-in-out;
 }
+    
 
-/* Внутренняя белая форма */
-#register-form .container-sign {
-  background-color: #ffffff;
-  margin: 5% auto;
-  padding: 2.5rem 3rem;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  font-family: 'Inter', sans-serif;
-  position: relative;
-}
-
-/* Заголовок */
-#register-form h2 {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  color: #191919;
-}
-
-/* Метки */
-.register-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* Поля ввода */
-.register-form input {
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  background-color: #f7f7f7;
-  transition: border-color 0.3s, background-color 0.3s;
-}
-
-.register-form input:focus {
-  border-color: #191919;
-  background-color: #fff;
-  outline: none;
-}
-
-/* Кнопка регистрации */
-.register-btn {
-  background-color: #191919;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.register-btn:hover {
-  background-color: #333;
-}
-
-/* Подпись с условиями */
-.terms {
-  font-size: 14px;
-  color: #e00606;
-  margin-bottom: 20px;
-  text-align: left;
-  line-height: 1.4;
-}
-
-.terms a {
-  color: #191919;
-  text-decoration: underline;
-}
-
-/* Крестик закрытия */
-#register-form .close {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 30px;
-  font-weight: bold;
-  color: #888;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-#register-form .close:hover {
-  color: #ff4d4d;
-}
-
-/* Анимация */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Адаптивность */
 @media (max-width: 600px) {
@@ -1317,48 +1194,385 @@ a[href^="tel:"] {
     padding: 12px;
   }
 }
+/* Профиль */
+
+        .container-profile {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            overflow: hidden;
+            margin-right: 30px;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .upload-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .profile-info {
+            flex-grow: 1;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .profile-email {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text-profile"],
+        input[type="password-profile"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #4a6bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a5bef;
+        }
+        
+        .btn-danger {
+            background-color: #ff4a4a;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e03a3a;
+        }
+        
+        .favorites-list {
+            display: flex;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .favorite-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #fileInput {
+            display: none;
+        }
 
 
 
+.container-panorama {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.profile-button {
-  display: inline-block;
-  padding: 8px 15px;
-  background-color: #4a6bff;
+/* Информация и контакты */
+.main-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 80px auto 80px auto;
+  flex-wrap: wrap;
+}
+.main-info p{
+    max-width: 600px;
+}
+.info {
+  flex: 1 1 60%;
+  padding-right: 20px;
+}
+.info p{
+    margin-top: 40px;
+}
+.contact-card {
+  flex: 1 1 30%;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #000;
+  align-content: center;
+}
+.contact-card a{
+    color: rgb(56, 56, 222);
+}
+.contact-card .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.contact-card button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: black;
   color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: all 0.3s;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.profile-button:hover {
-  opacity: 0.2;
+/* Карта */
+.map-block {
+  margin: 0px auto 80px auto;
+}
+.map-block iframe {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  max-width: 700px;
+}
+.block-add{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+.address-panorama {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.address-panorama i {
+  margin-right: 5px;
+}
+
+/* Отзывы */
+.reviews-panorama {
+  margin-top: 40px;
+}
+.rating-overall {
+  font-size: 24px;
+  margin: 10px 0;
+}
+.review-card {
+  background: #f6f6f6;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.review-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.location, .clock{
+    display: flex;
+    margin: 40px;
+}
+
+
+.slider-background-pages {
+    height: 70vh;
+}
+
+.swiper-slide-pages {
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+.slider-background-pages .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #000000;
+}
+.slider-background-pages .swiper-button-next,
+.slider-background-pages .swiper-button-prev {
+    color: #000;
+    background: rgba(255,255,255,0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.slider-background-pages .swiper-pagination{
+    position: relative;
+    margin-top: 20px;
+}
+.slider-background-pages .swiper-slide{
+    border-radius: 10px;
+}
+.swiper-button-next:after,.swiper-button-prev:after {
+    font-family: swiper-icons;
+    font-size: 20px;
+}
+
+
+
+
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.popup-btn {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.yes-btn {
+  background-color: #4a6bff;
+  color: white;
+}
+
+.yes-btn:hover {
+  background-color: #3a5bef;
+}
+
+.no-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.no-btn:hover {
+  background-color: #e0e0e0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Затемнение страницы при открытом попапе */
+body.popup-open {
+  overflow: hidden;
+}
+
+body.popup-open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 
@@ -1396,3 +1610,206 @@ a[href^="tel:"] {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lobby-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.lobby-header h1 {
+    font-size: 32px;
+    color: #2d3436;
+}
+
+.create-lobby-btn {
+    background-color: #4a6bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-lobby-btn:hover {
+    background-color: #3a5bef;
+}
+
+.lobby-controls {
+    margin-bottom: 20px;
+}
+
+.tags-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.tags-toggle input {
+    margin-right: 10px;
+}
+
+.lobby-list {
+    display: grid;
+    gap: 20px;
+}
+
+.lobby-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lobby-members {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.join-spot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px dashed #b2bec3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #636e72;
+    cursor: pointer;
+}
+
+.lobby-info {
+    display: flex;
+    gap: 15px;
+}
+
+.join-btn, .join-btn-popup {
+    background-color: #4a6bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.join-btn:hover, .join-btn-popup:hover {
+    background-color: #3a5bef;
+}
+
+.view-description {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-description:hover {
+    background-color: #e0e0e0;
+}
+
+/* Стили для попапа */
+.lobby-description-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.join-btn-popup {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+}
