@@ -171,6 +171,7 @@
             background: white;
             padding: 20px;
             overflow-y: auto;
+                height: calc(100vh - 80px);
         }
 
         .map-filter {
@@ -182,68 +183,11 @@
             height: 100%;
             width: 100%;
         }
-
-        .card {
-            width: 100%;
-            margin-bottom: 20px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .card-image-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .card-images {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-
-        .card-image-map {
-            min-width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .heart {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            text-shadow: 0 0 3px rgba(0,0,0,0.5);
-        }
-
-        .card > div:last-child {
-            padding: 15px;
-        }
-
-        .card h3 {
-            margin: 0 0 10px 0;
-            color: #333;
-        }
-
-        .card p {
-            margin: 0 0 15px 0;
-            color: #666;
-        }
-
         .btn-card {
             background: #4CAF50;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
+
         }
 
         .btn-card:hover {
@@ -404,8 +348,6 @@
                 <div class="card-image-container">
                     <div class="card-images" data-index="0">
                         <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya1.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya2.jpg') }}');"></div>
-                        <div class="card-image-map" style="background-image: url('{{ url_for('static', filename='images/syrovarnya3.jpg') }}');"></div>
                     </div>
                     <span class="heart">❤</span>
                 </div>
@@ -413,6 +355,48 @@
                     <h3>Сыроварня</h3>
                     <p>Ресторан итальянской кухни с собственным производством сыров.<br><strong>Сейчас здесь: 8 человек</strong></p>
                     <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/ruki-up.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Руки Вверх бар</h3>
+                        <p>Руки Вверх бар - популярное место для дней рождений и веселых праздничных банкетов. Для именинников действуют специальные выгодные предложения!<br><strong>Это место посетили Руки вверх Отпетые Мошенники, Feduk, Винтаж и др.</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/nebar.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Nebar</h3>
+                        <p>Nebar — легендарный клуб с двумя танцполами: слева — флирт и коктейли, справа — безумные вечеринки без правил.<br><strong>Это место посетил ведущий Егор Панин</strong></p>
+                        <button class="btn-card">Подробнее</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image-container">
+                    <div class="card-images" data-index="0">
+                        <div class="card-image-map" style="background-image: url('images/ben-hall.webp');"></div>
+                    </div>
+                    <span class="heart">❤</span>
+                </div>
+                <div>
+                      <h3>Ben Hall</h3>
+                        <p>Ben Hall — это бар, паб, ночной клуб и банкетный зал, расположенный в центре города. Он стилизован под старую Англию и предлагает своим гостям широкий выбор пива, а также вкусные бургеры и картошку..<br><strong>Это место посетили Сергей Бабкин из «Пятницы», Евгений Маргулис из «Машины времени» и др.</strong></p>
+                        <button class="btn-card">Подробнее</button>
                 </div>
             </div>
         </div>
