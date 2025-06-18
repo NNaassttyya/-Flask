@@ -72,7 +72,7 @@
 
                                         <div class="buttons">
                                             <button type="button" class="cancelBtn" onclick="document.getElementById('sign-up').style.display='none'">Закрыть</button>
-                                            <button type="submit" class="signUpBtn">Войти</button>
+                                            <button type="button" class="blackBtn" onclick="switchToLogin()">Войти</button>
                                         </div>
                                     </div>
                                 </form>
@@ -127,7 +127,7 @@
                 </div>
             </section>
 
-            <section class="about-us-screen">
+            <section class="about-us-screen" id="about-us">
                 <div class="about-us-container">
                     <h2>О нас</h2>
                     <div class="about-us-grid">
@@ -282,6 +282,48 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
+<script>
+    // Обработчик для кнопки "Подробнее"
+    document.querySelector('.btn-main').addEventListener('click', function() {
+        document.getElementById('about-us').scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
 
+    // Инициализация свайпера
+    const swiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+    });
+
+    // Функции для модальных окон
+    function showRegisterForm() {
+        document.getElementById('sign-up').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+    }
+
+    function switchToLogin() {
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('sign-up').style.display = 'block';
+    }
+
+    function closeAllModals() {
+        document.getElementById('sign-up').style.display = 'none';
+        document.getElementById('register-form').style.display = 'none';
+    }
+
+    function registerUser() {
+        // Здесь должна быть логика регистрации
+        alert('Регистрация выполнена!');
+        closeAllModals();
+    }
+</script>
 </body>
 </html>

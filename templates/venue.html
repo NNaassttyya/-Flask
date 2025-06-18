@@ -6,7 +6,7 @@
     <title>CityVibe</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css/mainstyle.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
 </head>
 <body>
     <header class="header">
@@ -18,7 +18,7 @@
                                 <ul class="navbar-menu">
                                     <li><a href="{{ url_for('map') }}">Карта</a></li>
                                     <li><a href="{{ url_for('index') }}">Главная</a></li>
-                                    <li><a href="{{ url_for('support') }">Тех поддержка</a></li>
+                                    <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
                                 </ul>
                             </div>
                             <a class="entrance" href="#" id="auth-button" onclick="document.getElementById('sign-up'). style.display='block'">Войти</a>
@@ -96,10 +96,10 @@
                 <div class="slider-background-pages">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="background-image: url(images/panoram1-img.webp);"></div>
-                            <div class="swiper-slide" style="background-image: url(images/panoram2-img.webp);"></div>
-                            <div class="swiper-slide" style="background-image: url(images/panoram3-img.jfif);"></div>
-                            <div class="swiper-slide" style="background-image: url(images/panoram4-img.webp);"></div>
+                            <div class="swiper-slide" style="background-image: url('{{ url_for('static', filename='images/panorama1.jpg') }}');"></div>
+                            <div class="swiper-slide" style="background-image: url('{{ url_for('static', filename='images/panoram2-img.webp') }}');"></div>
+                            <div class="swiper-slide" style="background-image: url('{{ url_for('static', filename='images/panoram3-img.jfif') }}');"></div>
+                            <div class="swiper-slide" style="background-image: url('{{ url_for('static', filename='images/panoram4-img.webp') }}');"></div>
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div> 
@@ -133,11 +133,11 @@
             <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A761cab5295838072b4e866a7eec9a8ef96a622df10af1a7898910c25e2f7afb9&amp;source=constructor" width="500" height="300" frameborder="0"></iframe>
             <div class="address-panorama">
                 <div class="location">
-                    <img src="images/ph_map-pin.svg">
+                    <img src="{{ url_for('static', filename='images/ph_map-pin.svg') }}">
                     <p><i class="fas fa-location-dot"></i> ул. Малышева, 51 • этаж 50</p>
                 </div>
                 <div class="clock">
-                    <img src="images/mdi_clock-outline.svg">
+                    <img src="{{ url_for('static', filename='images/mdi_clock-outline.svg') }}">
                     <p><i class="fas fa-clock"></i> Часы работы: Ежедневно с 12:00 до 00:00</p>
                 </div>
             </div>
@@ -180,10 +180,11 @@
                         <div class="social-section">
                             <h2>Социальные сети</h2>
                             <ul class="footer-menu-media">
-                                <li><a href="#"><img src="images/tg.svg"></a></li>
-                                <li><a href="#"><img src="images/tiktok.svg"></a></li>
-                                <li><a href="#"><img src="images/stash_telegram.svg"></a></li>
-                            </ul>
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tg.svg') }}"></a></li>
+                            <li><a href="#"><img src="{{ url_for('static', filename='images/tiktok.svg') }}"></a></li>
+                            <li><a href="#"><img
+                                    src="{{ url_for('static', filename='images/stash_telegram.svg') }}"></a></li>
+                        </ul>
                         </div>
 
                         <div class="partners-section">

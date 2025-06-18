@@ -355,5 +355,26 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('index'))
 
+@app.route('/venue/<int:venue_id>')
+def venue_details(venue_id):
+    """Страница с подробной информацией о заведении"""
+    venue = Venue.query.get_or_404(venue_id)
+    return render_template('venue.html', venue=venue)
+
+with app.app_context():
+    db.create_all()  # Создаем таблицы, если их нет
+    if not Venue.query.get(1):
+        panorama = Venue(
+            id=1,
+            name="Panorama",
+            description="Ресторан с панорамным видом на город...",
+            venue_type="restaurant",
+            latitude=56.8350,
+            longitude=60.6123,
+            current_visitors=12
+        )
+        db.session.add(panorama)
+        db.session.commit()
+
 if __name__ == '__main__':
     app.run(debug=True)
