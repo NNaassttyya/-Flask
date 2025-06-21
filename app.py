@@ -99,7 +99,6 @@ Swagger(app, config=swagger_config, template={
 })
 
 
-# 2. МОДИФИКАЦИЯ СУЩЕСТВУЮЩИХ РОУТОВ
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -107,38 +106,25 @@ def index():
         email = request.form['email']
         password = request.form['pass']
 
-        # Проверяем, существует ли пользователь
         existing_user = Post.query.filter_by(login=login).first()
         if existing_user:
-            # Если пользователь существует и пароль совпадает - выполняем вход
             if existing_user.password == password:
                 session['user_id'] = existing_user.id
-                return redirect(url_for('map'))
+                return redirect(url_for('map'))  # Перенаправляем на карту после входа
             else:
                 return 'Неверный пароль'
-        
-        # Если пользователь не существует - регистрируем
+
         post = Post(login=login, email=email, password=password)
 
         try:
             db.session.add(post)
             db.session.commit()
-            # После успешной регистрации сразу выполняем вход
             session['user_id'] = post.id
-            return redirect(url_for('map'))
+            return redirect(url_for('map'))  # Перенаправляем на карту после регистрации
         except:
             return 'При регистрации произошла ошибка'
     else:
-        return render_template('index.html')
-    """Главная страница
-    ---
-    tags:
-      - Основные страницы
-    responses:
-      200:
-        description: HTML главной страницы
-    """
-    return render_template('index.html')
+        return render_template('index.html', current_user_id=session.get('user_id'))
 
 
 @app.route('/support', methods=['GET', 'POST'])
@@ -177,7 +163,6 @@ def support():
 
 
 @app.route('/map')
-@login_required
 def map():
     """Страница с картой заведений
     ---
@@ -246,13 +231,14 @@ def delete_point(point_id):
     point = MapPoint.query.get_or_404(point_id)
     if point.user_id != session['user_id']:
         return jsonify({'success': False, 'error': 'Unauthorized'}), 403
-    
+
     try:
         db.session.delete(point)
         db.session.commit()
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
+
 
 @app.route('/get_venues', methods=['GET'])
 def get_venues():
@@ -263,11 +249,13 @@ def get_venues():
     """
     venue_type = request.args.get('type')  # restaurant, bar, club
     query = Venue.query
-    
+
     if venue_type:
         query = query.filter_by(venue_type=venue_type)
-    
-    venues = query.all()
+
+    # Исключаем заведение "Panorama" из результатов
+    venues = query.filter(Venue.name != "Panorama").all()
+
     venues_data = [{
         'id': venue.id,
         'name': venue.name,
@@ -278,7 +266,7 @@ def get_venues():
         'images': venue.images,
         'current_visitors': venue.current_visitors
     } for venue in venues]
-    
+
     return jsonify(venues_data)
 
 @app.route('/add_visitor', methods=['POST'])
@@ -294,10 +282,10 @@ def add_visitor():
         venue_id = data['venue_id']
         description = data.get('description', '')
         end_time = data['end_time']
-        
+
         venue = Venue.query.get_or_404(venue_id)
         venue.current_visitors += 1
-        
+
         new_point = MapPoint(
             user_id=session['user_id'],
             latitude=venue.latitude,
@@ -306,10 +294,10 @@ def add_visitor():
             end_time=datetime.strptime(end_time, '%Y-%m-%dT%H:%M'),
             created_at=datetime.now()
         )
-        
+
         db.session.add(new_point)
         db.session.commit()
-        
+
         return jsonify({
             'success': True,
             'point_id': new_point.id,
@@ -329,20 +317,20 @@ def remove_visitor(point_id):
     point = MapPoint.query.get_or_404(point_id)
     if point.user_id != session['user_id']:
         return jsonify({'success': False, 'error': 'Unauthorized'}), 403
-    
+
     try:
         # Находим ближайшее заведение к точке
         venue = Venue.query.filter(
             db.func.abs(Venue.latitude - point.latitude) < 0.0001,
             db.func.abs(Venue.longitude - point.longitude) < 0.0001
         ).first()
-        
+
         if venue and venue.current_visitors > 0:
             venue.current_visitors -= 1
-        
+
         db.session.delete(point)
         db.session.commit()
-        
+
         return jsonify({
             'success': True,
             'current_visitors': venue.current_visitors if venue else 0
@@ -355,26 +343,40 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('index'))
 
-@app.route('/venue/<int:venue_id>')
-def venue_details(venue_id):
-    """Страница с подробной информацией о заведении"""
-    venue = Venue.query.get_or_404(venue_id)
-    return render_template('venue.html', venue=venue)
+@app.route('/venue/panorama')
+def venue_panorama():
+    """Страница заведения Panorama
+    ---
+    tags:
+      - Заведения
+    responses:
+      200:
+        description: HTML страницы заведения
+    """
+    return render_template('venue.html')
 
-with app.app_context():
-    db.create_all()  # Создаем таблицы, если их нет
-    if not Venue.query.get(1):
-        panorama = Venue(
-            id=1,
-            name="Panorama",
-            description="Ресторан с панорамным видом на город...",
-            venue_type="restaurant",
-            latitude=56.8350,
-            longitude=60.6123,
-            current_visitors=12
-        )
-        db.session.add(panorama)
-        db.session.commit()
+
+@app.route('/profile')
+@login_required
+def profile():
+    """Страница профиля пользователя"""
+    user = Post.query.get(session['user_id'])
+    return render_template('profile.html', user=user)
+
+
+@app.route('/find-companion')
+@login_required
+def find_companion():
+    """Страница поиска компании"""
+    return render_template('find-companion.html', current_user_id=session.get('user_id'))
+
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+        # Добавьте тестовые данные
+        user = Post(login="admin", email="admin@test.com", password="12345")
+        db.session.add(user)
+        db.session.commit()
     app.run(debug=True)

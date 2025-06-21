@@ -3,10 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CityVibe</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>CityVibe - Найти компанию</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css/mainstyle.css">
+    <style>
+
+        /* Основной контент */
+        .lobby-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .lobby-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .lobby-header h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .create-lobby-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .create-lobby-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Список лобби */
+        .lobby-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .lobby-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .lobby-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .lobby-members {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: -10px;
+            border: 2px solid white;
+        }
+
+        .join-spot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #777;
+            border: 2px dashed #ccc;
+            cursor: pointer;
+        }
+
+        .lobby-info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .join-btn, .view-description {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .join-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .join-btn:hover {
+            background-color: #45a049;
+        }
+
+        .view-description {
+            background-color: #f0f0f0;
+            color: #555;
+        }
+
+        .view-description:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Попап описания лобби */
+        .lobby-description-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .join-btn-popup {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .join-btn-popup:hover {
+            background-color: #45a049;
+        }
+
+        /* Попап создания лобби */
+        .create-lobby-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .create-lobby-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .tags-section {
+            margin-bottom: 20px;
+        }
+
+        .tags-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tag:hover {
+            background-color: #e0e0e0;
+        }
+
+        .tag.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .current-tags h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .current-tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .current-tag {
+            background-color: #e0f7fa;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            min-height: 100px;
+            margin-bottom: 20px;
+            resize: vertical;
+        }
+
+        .create-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .create-btn:hover {
+            background-color: #45a049;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 <header class="header">
@@ -18,7 +293,7 @@
                 <ul class="navbar-menu">
                     <li><a href="{{ url_for('map') }}">Карта</a></li>
                     <li><a href="{{ url_for('index') }}">Главная</a></li>
-                    <li><a href="{{ url_for('support') }" class="active">Тех поддержка</a></li>
+                    <li><a href="{{ url_for('support') }}">Тех поддержка</a></li>
                 </ul>
             </div>
             <a class="entrance" href="#" id="auth-button"
@@ -96,140 +371,236 @@
         </div>
     </nav>
 </header>
-    <main class="lobby-container">
-        <div class="lobby-header">
-            <h1>Panorama A.S.P.</h1>
-            <button class="create-lobby-btn" onclick="createLobby()">Создать лобби</button>
-        </div>
 
-        <div class="lobby-list">
-            <!-- Лобби 1 -->
-            <div class="lobby-card">
-                <div class="lobby-members">
-                    <div class="member-avatar" style="background-color: #ff7675;"></div>
-                    <div class="member-avatar" style="background-color: #74b9ff;"></div>
-                    <div class="member-avatar" style="background-color: #55efc4;"></div>
-                    <div class="member-avatar" style="background-color: #a29bfe;"></div>
-                    <div class="member-avatar" style="background-color: #ffeaa7;"></div>
-                    <div class="join-spot">+</div>
-                </div>
-                <div class="lobby-info">
-                    <button class="join-btn">Присоединиться</button>
-                    <button class="view-description" onclick="showLobbyDescription(1)">Описание лобби</button>
-                </div>
+<main class="lobby-container">
+    <div class="lobby-header">
+        <h1>Panorama A.S.P.</h1>
+        <button class="create-lobby-btn" onclick="openCreateLobbyPopup()">Создать лобби</button>
+    </div>
+
+    <div class="lobby-list">
+        <!-- Лобби 1 -->
+        <div class="lobby-card">
+            <div class="lobby-members">
+                <div class="member-avatar" style="background-color: #ff7675;"></div>
+                <div class="member-avatar" style="background-color: #74b9ff;"></div>
+                <div class="member-avatar" style="background-color: #55efc4;"></div>
+                <div class="member-avatar" style="background-color: #a29bfe;"></div>
+                <div class="member-avatar" style="background-color: #ffeaa7;"></div>
+                <div class="join-spot">+</div>
             </div>
-
-            <!-- Лобби 2 -->
-            <div class="lobby-card">
-                <div class="lobby-members">
-                    <div class="member-avatar" style="background-color: #fab1a0;"></div>
-                    <div class="member-avatar" style="background-color: #0984e3;"></div>
-                    <div class="join-spot">+</div>
-                </div>
-                <div class="lobby-info">
-                    <button class="join-btn">Присоединиться</button>
-                    <button class="view-description" onclick="showLobbyDescription(2)">Описание лобби</button>
-                </div>
-            </div>
-
-            <!-- Лобби 3 -->
-            <div class="lobby-card">
-                <div class="lobby-members">
-                    <div class="member-avatar" style="background-color: #00b894;"></div>
-                    <div class="member-avatar" style="background-color: #6c5ce7;"></div>
-                    <div class="member-avatar" style="background-color: #fdcb6e;"></div>
-                    <div class="join-spot">+</div>
-                </div>
-                <div class="lobby-info">
-                    <button class="join-btn">Присоединиться</button>
-                    <button class="view-description" onclick="showLobbyDescription(3)">Описание лобби</button>
-                </div>
+            <div class="lobby-info">
+                <button class="join-btn">Присоединиться</button>
+                <button class="view-description" onclick="showLobbyDescription(1)">Описание лобби</button>
             </div>
         </div>
 
-        <!-- Попап с описанием лобби -->
-        <div class="lobby-description-popup" id="lobbyDescriptionPopup">
-            <div class="popup-content">
-                <span class="close-btn" onclick="closePopup()">&times;</span>
-                <h3 id="popupTitle">Описание лобби</h3>
-                <p id="popupDescription">Загрузка описания...</p>
-                <button class="join-btn-popup" onclick="joinLobby()">Присоединиться</button>
+        <!-- Лобби 2 -->
+        <div class="lobby-card">
+            <div class="lobby-members">
+                <div class="member-avatar" style="background-color: #fab1a0;"></div>
+                <div class="member-avatar" style="background-color: #0984e3;"></div>
+                <div class="join-spot">+</div>
+            </div>
+            <div class="lobby-info">
+                <button class="join-btn">Присоединиться</button>
+                <button class="view-description" onclick="showLobbyDescription(2)">Описание лобби</button>
             </div>
         </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Загрузка сохраненных данных при открытии страницы
-            const savedFirstName = localStorage.getItem('profileFirstName');
-            const savedLastName = localStorage.getItem('profileLastName');
-            const savedAge = localStorage.getItem('profileAge');
-            
-            if (savedFirstName) document.getElementById('firstName-profile').value = savedFirstName;
-            if (savedLastName) document.getElementById('lastName-profile').value = savedLastName;
-            if (savedAge) document.getElementById('age').value = savedAge;
-            if (savedFirstName && savedLastName) {
-                document.getElementById('userName').textContent = `${savedFirstName} ${savedLastName}`;
-            }
-        });
-        // Данные лобби (в реальном приложении будут приходить с сервера)
-const lobbiesData = {
-    1: {
-        title: "Вечерний ужин с новыми знакомствами",
-        description: "Ищем компанию для приятного вечера в Panorama. Планируем заказать несколько блюд на компанию. Возраст 25-35 лет."
-    },
-    2: {
-        title: "Дегустация вин",
-        description: "Собираемся попробовать новые сорта вин. Присоединяйтесь, если любите хорошие вина и приятные беседы."
-    },
-    3: {
-        title: "Бизнес-ланч",
-        description: "Ищу коллег для делового обеда. Обсудим возможные проекты и сотрудничество."
+
+        <!-- Лобби 3 -->
+        <div class="lobby-card">
+            <div class="lobby-members">
+                <div class="member-avatar" style="background-color: #00b894;"></div>
+                <div class="member-avatar" style="background-color: #6c5ce7;"></div>
+                <div class="member-avatar" style="background-color: #fdcb6e;"></div>
+                <div class="join-spot">+</div>
+            </div>
+            <div class="lobby-info">
+                <button class="join-btn">Присоединиться</button>
+                <button class="view-description" onclick="showLobbyDescription(3)">Описание лобби</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Попап с описанием лобби -->
+    <div class="lobby-description-popup" id="lobbyDescriptionPopup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h3 id="popupTitle">Описание лобби</h3>
+            <p id="popupDescription">Загрузка описания...</p>
+            <button class="join-btn-popup" onclick="joinLobby()">Присоединиться</button>
+        </div>
+    </div>
+
+    <!-- Попап создания лобби -->
+    <div class="create-lobby-popup" id="createLobbyPopup">
+        <div class="create-lobby-content">
+            <span class="close-popup" onclick="closeCreateLobbyPopup()">&times;</span>
+            <h2>Создать Лобби</h2>
+
+            <div class="tags-section">
+                <h3>Добавить теги</h3>
+                <div class="tags-container">
+                    <div class="tag" onclick="toggleTag(this)">альт</div>
+                    <div class="tag" onclick="toggleTag(this)">музыка</div>
+                    <div class="tag" onclick="toggleTag(this)">dota2</div>
+                    <div class="tag" onclick="toggleTag(this)">бизнес</div>
+                    <div class="tag" onclick="toggleTag(this)">кино</div>
+                    <div class="tag" onclick="toggleTag(this)">спорт</div>
+                </div>
+
+                <div class="current-tags">
+                    <h3>Текущие теги:</h3>
+                    <div class="current-tags-list" id="currentTagsList">
+                        <div class="current-tag">альт</div>
+                        <div class="current-tag">музыка</div>
+                    </div>
+                </div>
+            </div>
+
+            <textarea placeholder="Описание лобби"></textarea>
+
+            <button class="create-btn" onclick="createNewLobby()">Создать</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Данные лобби
+    const lobbiesData = {
+        1: {
+            title: "Вечерний ужин с новыми знакомствами",
+            description: "Ищем компанию для приятного вечера в Panorama. Планируем заказать несколько блюд на компанию. Возраст 25-35 лет."
+        },
+        2: {
+            title: "Дегустация вин",
+            description: "Собираемся попробовать новые сорта вин. Присоединяйтесь, если любите хорошие вина и приятные беседы."
+        },
+        3: {
+            title: "Бизнес-ланч",
+            description: "Ищу коллег для делового обеда. Обсудим возможные проекты и сотрудничество."
+        }
+    };
+
+    // Показать описание лобби
+    function showLobbyDescription(lobbyId) {
+        const popup = document.getElementById('lobbyDescriptionPopup');
+        const title = document.getElementById('popupTitle');
+        const description = document.getElementById('popupDescription');
+
+        title.textContent = lobbiesData[lobbyId].title;
+        description.textContent = lobbiesData[lobbyId].description;
+
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
-};
 
-// Показать описание лобби
-function showLobbyDescription(lobbyId) {
-    const popup = document.getElementById('lobbyDescriptionPopup');
-    const title = document.getElementById('popupTitle');
-    const description = document.getElementById('popupDescription');
-    
-    title.textContent = lobbiesData[lobbyId].title;
-    description.textContent = lobbiesData[lobbyId].description;
-    
-    popup.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
+    // Закрыть попап
+    function closePopup() {
+        document.getElementById('lobbyDescriptionPopup').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 
-// Закрыть попап
-function closePopup() {
-    document.getElementById('lobbyDescriptionPopup').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Присоединиться к лобби
-function joinLobby() {
-    alert('Вы успешно присоединились к лобби!');
-    closePopup();
-    // Здесь будет код для добавления пользователя в лобби
-}
-
-// Создать новое лобби
-function createLobby() {
-    window.location.href = "create-lobby.html";
-}
-
-// Закрытие попапа при клике вне его
-document.getElementById('lobbyDescriptionPopup').addEventListener('click', function(e) {
-    if (e.target === this) {
+    // Присоединиться к лобби
+    function joinLobby() {
+        alert('Вы успешно присоединились к лобби!');
         closePopup();
     }
-});
 
-// Инициализация страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Здесь может быть код для загрузки лобби с сервера
-});
-    </script>
-    <script src="js/main.js"></script>
+    // Открыть попап создания лобби
+    function openCreateLobbyPopup() {
+        document.getElementById('createLobbyPopup').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Закрыть попап создания лобби
+    function closeCreateLobbyPopup() {
+        document.getElementById('createLobbyPopup').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Переключение выбора тега
+    function toggleTag(element) {
+        element.classList.toggle('selected');
+        updateCurrentTags();
+    }
+
+    // Обновление списка выбранных тегов
+    function updateCurrentTags() {
+        const selectedTags = document.querySelectorAll('.tag.selected');
+        const currentTagsList = document.getElementById('currentTagsList');
+
+        currentTagsList.innerHTML = '';
+
+        selectedTags.forEach(tag => {
+            const tagClone = tag.cloneNode(true);
+            tagClone.classList.remove('selected');
+            tagClone.classList.add('current-tag');
+            tagClone.removeAttribute('onclick');
+            currentTagsList.appendChild(tagClone);
+        });
+    }
+
+    // Создание нового лобби
+    function createNewLobby() {
+        const description = document.querySelector('.create-lobby-content textarea').value;
+        const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(tag => tag.textContent);
+
+        if (!description.trim()) {
+            alert('Пожалуйста, добавьте описание лобби');
+            return;
+        }
+
+        if (selectedTags.length === 0) {
+            alert('Пожалуйста, выберите хотя бы один тег');
+            return;
+        }
+
+        // Здесь можно добавить логику отправки данных на сервер
+        console.log('Создано лобби с тегами:', selectedTags, 'и описанием:', description);
+
+        // Закрываем попап после создания
+        closeCreateLobbyPopup();
+
+        // Показываем уведомление об успешном создании
+        alert('Лобби успешно создано!');
+
+        // Очищаем форму
+        document.querySelector('.create-lobby-content textarea').value = '';
+        document.querySelectorAll('.tag.selected').forEach(tag => tag.classList.remove('selected'));
+        document.getElementById('currentTagsList').innerHTML = '';
+    }
+
+    // Закрытие попапов при клике вне их
+    document.getElementById('lobbyDescriptionPopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closePopup();
+        }
+    });
+
+    document.getElementById('createLobbyPopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeCreateLobbyPopup();
+        }
+    });
+</script>
+
+<script>
+    // Показ попапа через 5 секунд
+    setTimeout(function() {
+        document.getElementById('companionPopup').style.display = 'block';
+    }, 5000);
+
+    // Функция для поиска компании
+    function findCompanion() {
+        window.location.href = "{{ url_for('find_companion') }}";
+    }
+
+    // Функция закрытия попапа
+    function closePopup() {
+        document.getElementById('companionPopup').style.display = 'none';
+    }
+</script>
 </body>
 </html>

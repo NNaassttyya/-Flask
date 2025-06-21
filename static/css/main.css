@@ -1814,36 +1814,78 @@ body.popup-open::before {
     padding: 12px;
 }
 
-.entrance {
-    display: inline-block;
-    padding: 8px 100px;
-    background-color: black;
-    color: white;
-    text-decoration: white;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background-color 0.3s;
-    border: none;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
+.map-screen {
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-.entrance:hover {
-    background-color: #45a049;
+.map-screen:hover {
+    transform: translateY(-5px);
 }
-/* Черная кнопка (аналог cancelBtn, но без красного) */
-.blackBtn {
-    background-color: #000; /* Черный фон */
-    color: #fff; /* Белый текст */
+
+.heart.active {
+    color: red;
+    }
+
+    .blackBtn {
+    background-color: #000;
+    color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-weight: 500;
     transition: background-color 0.3s;
 }
 
 .blackBtn:hover {
-    background-color: #333; /* Темно-серый при наведении */
+    background-color: #333;
 }
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки равной ширины */
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cancelBtn {
+    width: 100%; /* Занимает всю доступную ширину */
+}
+
+/* Общие стили для кнопок в модальном окне */
+.buttons button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    flex: 1; /* Чтобы кнопки занимали одинаковую ширину */
+    text-align: center;
+}
+
+/* Стиль для кнопки "Закрыть" */
+.cancelBtn {
+    background-color: #191919;
+    color: white;
+}
+
+/* Стиль для кнопки "Войти" */
+.blackBtn {
+    background-color: #191919;
+    color: white;
+}
+
+/* Эффекты при наведении */
+.buttons button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.buttons button:active {
+    transform: translateY(0);
+}
+
